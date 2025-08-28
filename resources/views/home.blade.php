@@ -2,12 +2,12 @@
 
 @section('content')
 <!-- Hero Section -->
-<section id="home" class="min-h-screen flex items-center justify-center text-white relative overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(22, 163, 74, 0.9) 100%), url('{{ asset('assets/bg.jpg') }}') center/cover no-repeat;">
+<section id="home" class="min-h-screen flex items-center justify-center text-white relative overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(22, 163, 74, 0.9) 100%), url('{{ asset("assets/bg.jpg") }}') center/cover no-repeat;">
     <div class="absolute inset-0 bg-black/20"></div>
 
     <!-- Floating Elements -->
     <div class="absolute top-20 left-10 text-4xl animate-bounce opacity-20">🌱</div>
-    <div class="absolute top-40 right-20 text-3xl animate-bounce opacity-30" style="animation-delay: 1s;">🌿</div>
+    <div class="absolute top-40 right-20 text-3xl animate-bounce opacity-30 delay-1000">🌿</div>
     <div class="absolute bottom-40 left-20 text-5xl animate-bounce opacity-25" style="animation-delay: 2s;">🌾</div>
 
     <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto my-8">
@@ -189,9 +189,10 @@
             @foreach($products as $product)
             <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div class="relative overflow-hidden">
-                    <img src="{{ $product->image ? asset($product->image) : asset('assets/placeholder.png') }}"
-                         alt="{{ $product->name }}"
-                         class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500">
+                    <img 
+    src="{{ Str::startsWith($product->image, 'products/') ? asset('storage/' . $product->image) : asset($product->image) }}" 
+    alt="{{ $product->name }}"
+    class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500">
                     <div class="absolute top-4 left-4">
                         <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                             {{ $product->category }}
